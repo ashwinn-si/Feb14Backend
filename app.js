@@ -44,9 +44,17 @@ const userSchema = mongoose.Schema({
 })
 const userModel = new moongoose.model("userData", userSchema);
 
+function ipAddressFinder(req) {
+    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    if (ip.includes(',')) {
+        // If there are multiple IPs, take the first one
+        ip = ip.split(',')[0];
+    }
+    return ip;
+}
 
 app.post("/login", async (req, res) => {
-    const ipAddress = req.ip;
+    const ipAddress = await ipAddressFinder(req);
     const date = getDate();
     const time = getTime();
     const user = new userModel({
