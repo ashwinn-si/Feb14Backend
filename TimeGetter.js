@@ -1,7 +1,10 @@
 
 function TimeGetter(){
-    const time = new Date();
-    return(time.toLocaleTimeString("en-IN", { hour12: true }));
+    const time = new Date().toLocaleTimeString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        hour12: true
+    });
+    return time;
 }
 
 module.exports =  TimeGetter;
