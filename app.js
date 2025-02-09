@@ -6,6 +6,7 @@ const getDate = require("./DateGetter")
 const getTime = require("./TimeGetter")
 const DateGetter = require("./DateGetter");
 const cors = require("cors");
+const { timeStamp } = require('console');
 let dbID = null;
 require("dotenv").config();
 
@@ -40,7 +41,9 @@ const userSchema = mongoose.Schema({
     noClicks : {
         type : String,
         default : ""
-    },
+    }
+},{
+    timestamps: true
 })
 const userModel = new moongoose.model("userData", userSchema);
 
